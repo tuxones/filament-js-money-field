@@ -2,6 +2,6 @@
 
 All notable changes to `filament-js-money-field` will be documented in this file.
 
-## 1.0.0 - 202X-XX-XX
+## 0.0.1 - 2024-11-28
 
 - initial release
