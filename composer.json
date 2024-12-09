@@ -1,5 +1,6 @@
 {
     "name": "tuxones/filament-js-money-field",
+    "version": "0.1.0",
     "description": "A Laravel Filament plugin for dynamic international currency masking using JavaScript Intl, supporting flexible currency and locale configuration via closures.",
     "keywords": [
         "tuxon",
@@ -22,7 +23,9 @@
     "require": {
         "php": "^8.1",
         "filament/forms": "^3.0",
-        "spatie/laravel-package-tools": "^1.15.0"
+        "spatie/laravel-package-tools": "^1.15.0",
+        "ext-intl": "*",
+        "moneyphp/money": "^4.6"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.9",

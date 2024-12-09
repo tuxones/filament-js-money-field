@@ -6,7 +6,15 @@
 
 A Filament plugin for dynamic international currency masking using JavaScript Intl, supporting flexible currency and locale configuration via closures.
 
-This plugin extends the functionality of a standard text field by adding a dynamic currency mask. All properties and behaviors of the standard field remain intact. The entered value is stored as an integer, including the decimal cents, without any currency symbols or formatting.
+This plugin extends the functionality of a standard text field by adding a dynamic currency mask. All properties and behaviors of the standard field remain intact.
+
+## Supported Column Types
+
+The plugin supports `integer`, `decimal`, `double`, and `float`. However, it is **highly recommended** to use `integer` or `decimal` for better precision and consistency when handling currency values.
+
+If the column is of type `integer`, the entered value is stored as an integer, including the decimal cents, without any currency symbols or formatting.
+
+
 ## Installation
 
 You can install the package via composer:

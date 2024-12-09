@@ -4,6 +4,12 @@ namespace Tuxones\JsMoneyField\Forms\Components;
 
 use Closure;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
+use Money\Currencies\ISOCurrencies;
+use Money\Currency;
+use Money\Formatter\DecimalMoneyFormatter;
+use Money\Money;
 
 class JSMoneyInput extends TextInput
 {
@@ -17,8 +23,20 @@ class JSMoneyInput extends TextInput
     {
         parent::setUp();
 
-        $this->dehydrateStateUsing(function (JSMoneyInput $component, $state): ?string {
-            return filter_var($state, FILTER_SANITIZE_NUMBER_INT);
+
+        $this->dehydrateStateUsing(function (JSMoneyInput $component, ?Model $record, $state): ?string {
+            $type = Schema::getColumnType($record->getTable(), $component->name);
+            $sanitized = filter_var($state, FILTER_SANITIZE_NUMBER_INT);
+
+            if (in_array($type, ['decimal', 'float', 'double'])) {
+                $currencies = new ISOCurrencies();
+                $formatter = new DecimalMoneyFormatter($currencies);
+                $money = new Money($sanitized, new Currency($component->getCurrency()));
+
+                return (string) $formatter->format($money);
+            }
+
+            return (string) $sanitized;
         });
     }
 
