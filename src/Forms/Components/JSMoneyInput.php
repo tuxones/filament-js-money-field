@@ -23,9 +23,8 @@ class JSMoneyInput extends TextInput
     {
         parent::setUp();
 
-
-        $this->dehydrateStateUsing(function (JSMoneyInput $component, ?Model $record, $state): ?string {
-            $type = Schema::getColumnType($record->getTable(), $component->name);
+        $this->dehydrateStateUsing(function (JSMoneyInput $component, $state): ?string {
+            $type = Schema::getColumnType($this->getModelInstance()->getTable(), $component->name);
             $sanitized = filter_var($state, FILTER_SANITIZE_NUMBER_INT);
 
             if (in_array($type, ['decimal', 'float', 'double'])) {
