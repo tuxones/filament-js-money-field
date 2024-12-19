@@ -25,7 +25,10 @@ class JSMoneyEntry extends TextEntry
     private function reloadFormatStateUsing()
     {
         $this->formatStateUsing(function (JSMoneyEntry $column, string $state){
-            $sanitized = filter_var($state, FILTER_SANITIZE_NUMBER_INT);
+            $sanitized = ltrim(preg_replace('/\D/', '', $state), '0');
+            if(!$sanitized){
+                return $sanitized;
+            }
             $money = new Money($sanitized, new Currency($column->getCurrency()));
             $currencies = new ISOCurrencies();
 
