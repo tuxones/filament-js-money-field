@@ -2,15 +2,25 @@
 
 All notable changes to `filament-js-money-field` will be documented in this file.
 
-## [0.1.3] - 2024-12-19
+## [0.1.4] - 2024-12-20
 
 ### Fixed
-- Resolved the fatal error encountered when state starts with 0 on Entry [#1](https://github.com/tuxones/filament-js-money-field/issues/4)
+- Resolved the fatal error encountered when state is empty
 
 ## [0.1.2] - 2024-12-19
 
 ### Fixed
-- Resolved the fatal error encountered when state starts with 0 [#1](https://github.com/tuxones/filament-js-money-field/issues/4)
+- Resolved the fatal error encountered when state starts with 0 [#4](https://github.com/tuxones/filament-js-money-field/issues/4)
+
+## [0.1.3] - 2024-12-19
+
+### Fixed
+- Resolved the fatal error encountered when state starts with 0 on Entry [#4](https://github.com/tuxones/filament-js-money-field/issues/4)
+
+## [0.1.2] - 2024-12-19
+
+### Fixed
+- Resolved the fatal error encountered when state starts with 0 [#4](https://github.com/tuxones/filament-js-money-field/issues/4)
 
 ## [0.1.1] - 2024-12-13
 

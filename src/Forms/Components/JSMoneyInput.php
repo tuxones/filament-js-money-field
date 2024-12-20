@@ -26,7 +26,9 @@ class JSMoneyInput extends TextInput
         $this->dehydrateStateUsing(function (JSMoneyInput $component, $state): ?string {
             $type = Schema::getColumnType($this->getModelInstance()->getTable(), $component->name);
             $sanitized = ltrim(preg_replace('/\D/', '', $state), '0');
-
+            if(!$sanitized){
+                return null;
+            }
             if (in_array($type, ['decimal', 'float', 'double'])) {
                 $currencies = new ISOCurrencies();
                 $formatter = new DecimalMoneyFormatter($currencies);
