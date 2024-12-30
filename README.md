@@ -1,4 +1,4 @@
-# This is my package filament-js-money-field
+# filament-js-money-field
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tuxones/filament-js-money-field.svg?style=flat-square)](https://packagist.org/packages/tuxones/filament-js-money-field)
 [![Total Downloads](https://img.shields.io/packagist/dt/tuxones/filament-js-money-field.svg?style=flat-square)](https://packagist.org/packages/tuxones/filament-js-money-field)
