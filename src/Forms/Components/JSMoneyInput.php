@@ -24,12 +24,11 @@ class JSMoneyInput extends TextInput
         parent::setUp();
 
         $this->dehydrateStateUsing(function (JSMoneyInput $component, $state): ?string {
-            $type = Schema::getColumnType($this->getModelInstance()->getTable(), $component->name);
             $sanitized = ltrim(preg_replace('/\D/', '', $state), '0');
-            if(!$sanitized){
+            if(!$sanitized) {
                 return null;
             }
-            if (in_array($type, ['decimal', 'float', 'double'])) {
+            if (in_array($this->getColumnType($component), ['decimal', 'float', 'double'])) {
                 $currencies = new ISOCurrencies();
                 $formatter = new DecimalMoneyFormatter($currencies);
                 $money = new Money($sanitized, new Currency($component->getCurrency()));
@@ -41,6 +40,20 @@ class JSMoneyInput extends TextInput
         });
     }
 
+    private function getColumnType(JSMoneyInput $component)
+    {
+        $model = $this->getModelInstance();
+        if (str_contains($component->name, '.')) {
+            $relationshipName = \Str::beforeLast($component->name, '.');
+            $columnName = \Str::afterLast($component->name, '.');
+
+            if (method_exists($model, $relationshipName)) {
+                $relatedModel = $model->{$relationshipName}()->getRelated();
+                return Schema::getColumnType($relatedModel->getTable(), $columnName);
+            }
+        }
+        return Schema::getColumnType($model->getTable(), $component->name);
+    }
     public function currency(string | Closure $condition): static
     {
         $this->currency = $condition;
