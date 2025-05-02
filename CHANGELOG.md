@@ -2,6 +2,11 @@
 
 All notable changes to `filament-js-money-field` will be documented in this file.
 
+## [0.1.6] - 2025-05-02
+
+### Fixed
+- Implemented validation rules for currencies and locales [#10](https://github.com/tuxones/filament-js-money-field/issues/10)
+
 ## [0.1.5] - 2024-12-30
 
 ### Fixed

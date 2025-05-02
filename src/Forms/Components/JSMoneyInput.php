@@ -4,12 +4,12 @@ namespace Tuxones\JsMoneyField\Forms\Components;
 
 use Closure;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money;
+use Tuxones\JsMoneyField\Rules\CurrencyRule;
 
 class JSMoneyInput extends TextInput
 {
@@ -38,6 +38,12 @@ class JSMoneyInput extends TextInput
 
             return (string) $sanitized;
         });
+
+        $this->rules([
+            function() {
+                return new CurrencyRule($this->getCurrency(), $this->getLocale());
+            },
+        ]);
     }
 
     private function getColumnType(JSMoneyInput $component)

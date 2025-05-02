@@ -113,7 +113,7 @@
                 const fractionDigits = formatter.resolvedOptions().maximumFractionDigits;
 
                 const length = input.replace(/[^\d]/g, '').length;
-                if (length <= fractionDigits) return '9'.repeat(length);
+                if (length <= fractionDigits) return '9'.repeat(Math.max(1, length));
 
                 const baseString = '9'.repeat(length);
                 const formatted = baseString.slice(0, -fractionDigits) + decimalSeparator + baseString.slice(-fractionDigits);
