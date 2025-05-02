@@ -2,6 +2,11 @@
 
 All notable changes to `filament-js-money-field` will be documented in this file.
 
+## [0.1.7] - 2025-05-02
+
+### Fixed
+- Fixed bug of wrong value stored at the database [#13](https://github.com/tuxones/filament-js-money-field/issues/13)
+
 ## [0.1.6] - 2025-05-02
 
 ### Fixed

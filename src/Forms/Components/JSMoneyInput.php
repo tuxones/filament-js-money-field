@@ -28,7 +28,7 @@ class JSMoneyInput extends TextInput
             if(!$sanitized) {
                 return null;
             }
-            if (in_array($this->getColumnType($component), ['decimal', 'float', 'double'])) {
+            if ($this->isDecimal($component)) {
                 $currencies = new ISOCurrencies();
                 $formatter = new DecimalMoneyFormatter($currencies);
                 $money = new Money($sanitized, new Currency($component->getCurrency()));
@@ -39,11 +39,23 @@ class JSMoneyInput extends TextInput
             return (string) $sanitized;
         });
 
+        $this->formatStateUsing(function($component, $state) {
+            if(!$this->isDecimal($component)) {
+                return $state;
+            }
+
+            return number_format((float) $state, 2, '.', '');
+        });
+
         $this->rules([
             function() {
                 return new CurrencyRule($this->getCurrency(), $this->getLocale());
             },
         ]);
+    }
+
+    private function isDecimal(JSMoneyInput $component) {
+        return in_array($this->getColumnType($component), ['decimal', 'float', 'double']);
     }
 
     private function getColumnType(JSMoneyInput $component)

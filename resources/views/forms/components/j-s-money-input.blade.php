@@ -101,18 +101,22 @@
                     ])
             "
             x-mask:dynamic="function (input) {
+                const numericInput = Number(input);
+                const sanitized = input.replace(/[^\d]/g, '');
+
                 const formatter = new Intl.NumberFormat( '{{$getLocale() ?? 'en-US'}}' , {
                     style: 'currency',
                     currency: '{{$getCurrency() ?? 'USD'}}'
                 });
 
-                const parts = formatter.formatToParts(1234.56);
+                const value = isNaN(numericInput) ? 1234.56 : numericInput.toFixed(2);
+                const parts = formatter.formatToParts(value);
 
                 const decimalSeparator = parts.find(part => part.type === 'decimal')?.value || '.';
                 const thousandsSeparator = parts.find(part => part.type === 'group')?.value || ',';
                 const fractionDigits = formatter.resolvedOptions().maximumFractionDigits;
 
-                const length = input.replace(/[^\d]/g, '').length;
+                const length = sanitized.length;
                 if (length <= fractionDigits) return '9'.repeat(Math.max(1, length));
 
                 const baseString = '9'.repeat(length);
