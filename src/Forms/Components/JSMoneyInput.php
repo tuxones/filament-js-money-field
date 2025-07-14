@@ -19,6 +19,8 @@ class JSMoneyInput extends TextInput
 
     protected string | Closure $locale = 'en-US';
 
+    protected string | null $columnType = null;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -46,9 +48,23 @@ class JSMoneyInput extends TextInput
         ]);
     }
 
+    public function columnType(string $type): static
+    {
+        $this->columnType = $type;
+        return $this;
+    }
+
     private function getColumnType(JSMoneyInput $component)
     {
+        if ($this->columnType) {
+            return $this->columnType;
+        }
+
         $model = $this->getModelInstance();
+        if (!$model) {
+            return 'string';
+        }
+
         if (str_contains($component->name, '.')) {
             $relationshipName = \Str::beforeLast($component->name, '.');
             $columnName = \Str::afterLast($component->name, '.');
